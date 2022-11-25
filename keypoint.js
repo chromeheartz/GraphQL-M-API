@@ -68,3 +68,47 @@
   REST API가 좋은 점중 하나이다
 
 */
+
+/*
+  #3.0 What is GraphQL?
+
+  GraphQL
+  GraphQL은 하나의 specification같은것이다
+  누군가 spec을 읽고 GraphQL-js라는 javascript로 구현한 오픈소스가
+  첫번쨰 오픈소스이다.   
+*/
+
+/*
+  #3.1 Overfetching
+
+  어떤 문제들을 GraphQL이 해결했는지 알아볼것이다
+  rest API에는 2가지의 문제점이 있다. over-fetching / under-fetching
+
+  - over-fetching 문제점
+  JSON으로 데이터를 받아오면 엄청 긴 데이터가 올것이다 이것이 over-fetching이다
+  내가 데이터를 쓰던 말던 너무 많은 data를 받는것
+
+  * 하지만 GraphQL은 url로 데이터를 즉시 받지 않는다
+  필요한 data를 요청한다. 
+
+*/
+
+/*
+  #3.2 Underfetching
+
+  - under-fetching 
+  우리가 필요한것보다 덜 받는 under-fetching 문제점이 있다
+  예를들어 한가지 영화를 데이터로 받아오는데 
+  그 데이터의 카테고리가 액션인지 호러, 코미디인지를 알려면 genre라는 데이터에 받아올것이다
+  하지만 genre의 id만 받아오고 comedy이런 정보를 얻지못해서 
+  이 카테고리를 보여주고싶다면 한번 더 url에 request를 해야한다
+
+  이런것이 under-fetching이다
+  정보를 한번에 보여주고싶은데 어떤 정보를 보여주기 전에
+  두가지 request를 해야하는것
+  (fetch를 2번해서 영화정보 / 장르정보를 가져와야함)
+
+  추가로 필요하다면 한번 더 요청을 해야한다.
+
+  * GraphQL에서는 한번의 request로 해결해 낼 수 있다.
+*/
