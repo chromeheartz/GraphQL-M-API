@@ -156,3 +156,46 @@
   !! under-fetching 해결
   하나의 request로 우리가 원하는것을 다 받아냈다.
 */
+
+/*
+  #4.0 Set up
+
+  GraphQL API르ㄹ Apollo server라는것을 써볼것이다
+  오픈소스인데 spec-compliant GraphQL server라고 써있는것이 graphql의 spec을 구현하고있는것이다
+  exporess로 만들어진 rest API를 graph ql 로 바꾸고 싶다면
+  server를 그렇게 많이 수정안하고 middleware만 추가해주면 된다
+
+  npm init -y로 node repo를 초기화시켜준다
+
+  또 설치할것이 몇가지 있다 apollo=server , graphql, nodemon
+  nodemon은 -D(devDependencies로 설치)
+  npm i nodemon -D
+
+  server.js, git ignore도 만들어준다
+
+  package.json에서 test script를 dev로 바꾸고 명령어를 지정해준다
+
+  sever.js에 import { ApolloServeer, gql } from "apollo-server" 임포트해주고
+  package.json에 type을 module이라고 해야하는 이유는
+  그렇게 하지 않으면 import가 아닌 const { ApolloServer, gql } = require('apollo-server)
+  이런식으로 작성해야 했기 때문이다.
+
+  const server = new ApolloServer({})
+  서버를 만들어주고
+  listen() promise
+  then을 하면 onfullfilled argument가 있는데 그것은 value가 있고
+  그 타입은 listen을 찍어서 들어가보면 나온다
+
+  server.listen().then(({url}) => {
+    console.log(`Running on ${url}`)
+  })
+  이런식으로 작성하고 보게되면 오류가나는데
+
+  APollo server는 존재하는 schema나 modules또는 typeDefs를 가져야한다.
+  이것은 다음영상에서 해볼것.
+
+  중요한건 
+  throw Error('Apollo Server requires either an existing schema, modules or typeDefs');
+  이 에러가 떴다는건 잘 진행되고 있다는뜻이고, 이 에러로인해서 무언가를 배워볼것이다
+
+*/
