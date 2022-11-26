@@ -112,3 +112,47 @@
 
   * GraphQL에서는 한번의 request로 해결해 낼 수 있다.
 */
+
+/*
+  #3.3 Try Graph QL
+
+  https://graphql.org/swapi-graphql
+  여기서 테스트를 해볼수있다.
+
+  * GraphiQL 은 browser tool인데 graphql query를 쓰고 보낼 수 있게 해준다.
+  docs에 root를 눌러보면 요청할 수 있는 데이터들이 나열되어있을것이다
+  예를들어 films는
+  /api/v1/films처럼 될것이다
+
+  allFilms(
+    after: String
+    first: Int
+    before: String
+    last: Int
+  ): FilmsConnection
+
+  이것의 데이터를 요청해볼것이다
+  {
+    allFilms {
+      totalCount
+      films {
+        title,
+        episodeID
+      }
+    }
+  }
+
+  이런식으로 allFilms안의 totalCount를 가지고 와보았다
+  딱 우리가 원하는것만 요청하고 받아내었다. !! over-fetching 해결
+
+  *** over, under fetching 이외에도 GraphQL의 장점은
+  모든 것들이 type을 가지고 있다는 것이고 즉, 자동완성이 가능하다
+
+  allPeople을 예로 들어보면
+  people만 써보면 에러가 날것이다 GraphQL에서는 구체적으로 요구해야하기 때문
+  allPeople은 object가 있는 array를 줬는데
+  그 안에 name, hairColor, eyeColor등이 들어있다
+
+  !! under-fetching 해결
+  하나의 request로 우리가 원하는것을 다 받아냈다.
+*/
