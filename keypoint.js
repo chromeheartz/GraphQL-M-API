@@ -248,5 +248,68 @@
 */
 
 /*
-  
+  #4.2 Scalar and Root Types
+
+  polar studio라고 Apollo가 자체적인 studio를 가지고있는데
+  이것이 graphql api를 explore할 수 있게 해준다
+
+  explorer에서 text, hello라고 요청을 해보면 null이라고 나올것인데
+  얘는 String을 return해야하는데 null이 나오는건이상하다
+
+  error가 안뜨는것과 null이 나오고 누가 null이라고 하는것인지가 
+  알아야할 조각중 하나다
+
+  *** 첫번째 해야할것은 API가 생긴모양을 graphql에게 설명해주어야한다
+  그리고 나서 사용자가 원하는 data를 만들어 낼 수 있도록 실제코드를 작성한다
+
+  일단은 API의 shape을 설명하는것에 집중
+
+  * Scalar type, non-Scalar type, root type이 있다.
+  Scalar type은 built-in되어있다
+  String, Int, Boolean, ID ...
+
+  allTweets같은 모든 트윗을 주는것을 예로 들어보면 Scalar type을 쓸 수 없다
+  db에 있는 모든 트윗을 유저에게 전달하고 싶기때문에 
+  우리만의 type을 만들것
+
+  Tweet type이 user에 의해 만들어졌다고해보겠다
+
+  type User {
+    id: ID
+    username: String
+  }
+  type Tweet {
+    id: ID
+    text: String
+    author: User
+  }
+  type Query {
+    allTweets: [Tweet]
+  }
+
+  누군가 allTweets를 request하면 all Tweets field가 Tweet의
+  list type을 return하도록한다.
+
+  이렇게하면 내가 어떤 타입을 정의하던지 상관없고 연결도 가능해진다
+
+  Tweet의 list로 [Tweet]을 쓰는것과 그냥 User하나를 쓰는것은 엄청나게 다르다
+  이것은 database관계에 따라 결정된다
+  지금 말하는것은 Tweet이 하나의 author를 갖는다는것이고
+  allTweets은 여러개의 Tweet을 준다는것
+  하나의 tweet도 받을수있게하고
+
+  query Tweet {
+    tweet {
+      text
+    }
+  }
+  이렇게하면 문제가 생기는데 무슨 tweet인지 모르는것이다
+  rest API에서 하는 api/v1/tweet/:id처럼
+  id를 받고싶은데 이것을 하려면
+  argument를 받으면 된다
+
+  하나의 tweet을 request하는 사람은 db에서 찾을 수 있도록 id를 말해줄것이다
+  tweet(id: ID): Tweet
+  이렇게 말해주게되면 request를 받는데 tweet의 id를 함께 받을것이다
+  * 실행되는코드가 아닌 타입에대한 설명
 */
