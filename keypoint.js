@@ -160,7 +160,7 @@
 /*
   #4.0 Set up
 
-  GraphQL API르ㄹ Apollo server라는것을 써볼것이다
+  GraphQL API를 Apollo server라는것을 써볼것이다
   오픈소스인데 spec-compliant GraphQL server라고 써있는것이 graphql의 spec을 구현하고있는것이다
   exporess로 만들어진 rest API를 graph ql 로 바꾸고 싶다면
   server를 그렇게 많이 수정안하고 middleware만 추가해주면 된다
@@ -198,4 +198,55 @@
   throw Error('Apollo Server requires either an existing schema, modules or typeDefs');
   이 에러가 떴다는건 잘 진행되고 있다는뜻이고, 이 에러로인해서 무언가를 배워볼것이다
 
+*/
+
+/*
+  #4.1 Query Type
+
+  현재 에러가 뜨는 이유는 graphql이 data의 shapq을 미리 알고잇어야하기 때문
+  graphql api는 많은 type들의 집합이다.
+
+  * return 하려하는 data나 사용자가 쓸수있는 query 등등은
+  server가 실행하기 전에 graphql에게 설명해야하는 부분이다
+
+  const typeDefs = gql``
+  graphql function을 사용할것인데
+  ``안에 작성해야하는것은 chema definition language이다
+  그래서 여기서 data의 shapq을 설명해줄것이다
+
+  graphql SDL을 쓰는데 이건 schema definition language라는 것이고,
+  query data, data의 shapq을 설명하는데에도 같은 언어를 쓴다는것은 좋다
+
+  typeDefs를 ApolloServer에 적어주면
+  GraphQLError: Syntax Error: Unexpected <EOF>. 이런에러가 출력되는데
+  예상치못한 EDF(end of file)이다.
+
+  type이 비어있기 때문에 그렇다.
+  우리가 '의무적으로' 써야하는것은 Query라는 type을 작성해야한다.
+
+  그냥 다른것부터 써버리면 Query root type은 제공되어야한다고 에러가 뜬다.
+  이 Query type없이는 서버가 시작하지 않을것이다
+
+  Query type에 뭘 넣던지간에 그것들은 모두 사용자가 request할 수 있게 된다
+
+  *** 
+  만약 Query 안에
+  hello: String을 만들면
+  rest API 에서
+  /hello URL을 만든것이랑 같다
+
+  * 
+  type Root {...} 이런식으로 작성후 상단에
+  schema {
+    query: Root
+  }
+  이런식으로 alias(별칭)으로 작성해주어도 된다.
+
+  ****
+  사용자가 request할 수 있도록 하고싶은 모든것은
+  type Query안에 있어야한다.
+*/
+
+/*
+  
 */
