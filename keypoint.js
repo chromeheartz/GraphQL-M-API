@@ -313,3 +313,40 @@
   이렇게 말해주게되면 request를 받는데 tweet의 id를 함께 받을것이다
   * 실행되는코드가 아닌 타입에대한 설명
 */
+
+/*
+  #4.3 Mutation Type
+
+  Query에 넣은 field들은 user에 의해 request되는것을 알게 되었다
+
+  * Mutation
+  query type에 넣는것은 rest API 에서 get URL이 될것이다
+  graphql에서 POST request같은 모든 것들은
+  Mutation type에 넣어줄것이다
+  특별한 타입인데
+
+  **** user가 보낸 data로 mutate하는 동작들을 모두 넣는것이다 ****
+  
+  type Mutation {
+    postTweet(text: String): Tweet
+  }
+
+  user가 tweet을 post하려면 tweet의 내용을 주어야하고 그것은 문자열이다.
+  그 mutation이 끝나면 user한테 새로운 Tweet을 줄것인데
+  authentication이 없기 때문에 user한테 userId를 받아와서 Tweet을 만들것
+
+  backend를 mutate한다면 그것이 mutation이다.
+
+  mutation {
+    postTweet(text: "hello First Tweet", userId: "1") {
+      text
+    }
+  }
+
+  기본적으로 query로 되어있어서 mutate를 하려면
+  mutation이라고 명시적으로 써주어야한다
+  이것은 그냥 url에 POST request를 쓸 수 있도록 해주는것임.
+
+  user가 나한테 data를 보내서 그 data가 database로 가거나 무언가를 
+  지우거나 업데이트를 하거나 하면 그건 mutation이 되어야한다.
+*/
