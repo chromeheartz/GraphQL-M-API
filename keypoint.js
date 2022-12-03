@@ -372,6 +372,29 @@
   [Tweet!]! 와 [Tweet]!
   Tweet과 Tweet!
   의 차이점을 잘 알고 null을 이해하는것이 중요하다
+*/
 
+/*
+  #4.5 Recap
+
+  graphql의 포인트는 무엇인지 의도는 뭔지를 명확히 하는것이 좋다
+  Query field들의 의도는 db에서 data를 얻고자 할 것이고
+  Mutation field의 의도는 db를 수정하려고 하는것이다
+
+  !
+  느낌표를 쓰지 않는다면 기본적으로 'nullable field'가 된다
+  id: ID면 ID도 될수 있고 null도 될 수 있다는 뜻
+
+  만약 user가 id로 null을 가지고 있어도 문제가 없다는 뜻
+  !를 뒤에 써주게되면 null이면 안된다는것을 알려준다
+  만약 이 field들이 널이면 error가 나온다
+
+  무엇이 필수인지 구체화 할 수 있는것
+  이것은 argument에도 적용이 된다
+
+  * nullable & non nullable
+  allTweets: [Tweet!]!
+  이 부분에서 서버를 방금 시작할수도있고 db에 Tweet이 없을 수 있어서
+  []! 는 괜찮다 하지만 list안에 null이 있는것은 괜찮지 않다
   
 */
