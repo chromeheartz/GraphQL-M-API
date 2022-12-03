@@ -350,3 +350,28 @@
   user가 나한테 data를 보내서 그 data가 database로 가거나 무언가를 
   지우거나 업데이트를 하거나 하면 그건 mutation이 되어야한다.
 */
+
+/*
+  #4.4 Non Nullable Fields
+
+  Type을 그냥 Tweet이런식으로 저장하면 이게 Tweet이 될수도 있고 null이될 수도 있다
+  Tweet | null 같이 됨 기본값인데 nullable field라고 한다
+
+  필수로 만들어주고싶으면 ! 를 붙이면 된다
+  tweet(id: ID!) tweet Query를 쓰려면 ID를 보내야 한다는것이다
+  반환하는값에 확신한다면 ! 를 붙여주면된다.
+
+  tweet(id: ID!): Tweet!
+  이것은 맞지 않을 수 있다 예를들어 9112라고 현재 없는 ID의 번호를 보내는데도
+  Tweet이 반환되는것은 말이 되지 않기 떄문
+
+  [Tweet]! 이런식으로 하게되면
+  allTweets가 항상 list를 반환할것인데
+  [Tweet, null, Tweet] 이런식으로 들어갈 수도있다
+
+  [Tweet!]! 와 [Tweet]!
+  Tweet과 Tweet!
+  의 차이점을 잘 알고 null을 이해하는것이 중요하다
+
+  
+*/
