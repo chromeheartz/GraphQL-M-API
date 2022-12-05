@@ -398,3 +398,49 @@
   []! 는 괜찮다 하지만 list안에 null이 있는것은 괜찮지 않다
   
 */
+
+/*
+  #4.6 Query Resolvers
+
+  이제 data를 만들어낼 코드를 만들어볼것이다
+
+  * 현재까지 한것은 GraphQL schema definition language였다
+  모든 GraphQL 실행에서 이 언어를 이해할것이다
+  하지만 어떤 프로그래밍 언어를 사용하느냐에 따라 후에 할 작업이 달라질것
+
+  로직은 같다 로직은 resolvers라고 한다
+
+  * resolvers
+  하나의 객체가 될것이고, 우리의 타입 정의와 같은 형태를 가진다
+
+  이름이 같아야 하는게 중요하다 Apollo가 누군가 query의 tweet을 요청하는것을 보면
+  resolvers의 query로 갈것이고 function을 실행시킬것이기 때문
+
+  resolvers에 tweet함수를 만들어 return을 null로 해주고 
+  콘솔을 찍어보면 콘솔이 출력될것이다.
+
+  ping, pong으로 예를들어서 해보아도 제대로 pong이 return이 되고있다
+
+  **** 우리가 사용할 단어들을 외우는게 중요하다
+  type query 안에 allTweets라는 field를 가지고있고
+  우리가 이제 allTweets를 위한 resolver를 작성해볼것이다
+
+  가짜 db를 만들었다 tweets의 list를 위해
+  여기서는 GraphQl에 우리가 알려줬던 형태를 따라야한다.
+
+  allTweets는 간단히 정리가 되었는데
+  이제 두번째 tweet(id)를 실행해볼것이다
+
+  arguments에 대해 알아볼것. 왜냐면 우리는 user에게 그들이 요청한 id의 tweet을
+  return해야하기때문
+
+  사실 Apollo 서버가 resolver function을 부를때 어떤 argument를 준다
+  첫번째것은 root, 두번째것은 내가 원하는 arguments
+  console.log로 찍어서 확인해보면 내가 요청한 id가 인자로 
+  잘 들어온것을 볼 수 있다
+
+  *** user가 보낸 argument가 항상 resolver function의 두번째 args가 된다 ***
+  두번째 인자에서 풀어서 {id}로 받아와볼수도있다
+
+  이제 Tweets 배열안에 있는 Tweet을 .find 메서드로 찾아볼것
+*/
