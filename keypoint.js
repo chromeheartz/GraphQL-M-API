@@ -474,3 +474,47 @@
   * db를 mutate한다면 Mutation
   * db를 그냥 fetching한다면 Query
 */
+
+/*
+  #4.8 Type Resolvers
+
+  어떤 type 내부의 어떤 field든 resolver function을 만들어볼것이다
+  Query, Mutation안에 있는 field들만 얘기하는것이 아니다.
+
+  users의 db를 만들어보고 해봄.
+  
+  ** dynamic field
+  지금 id, firstName, lastName은 db로 부터온다
+  기본적으로 Apollo server는 
+  내가 return하는 객체안에 lastName이 있을것이란것을 알고 있다.
+
+  만약 user가 fullName이라는 field를 가지게하고
+  non-nullable String으로 해보면 어떻게 될까
+
+  그렇게 하면 작동하지 않는다 우리의 data안에 fullName field가 존재하지 않기 때문
+  이제 fullName의 resolver를 만들때가 된것이다
+
+  * 만약 type Query가 allUsers를 가지고있다면
+  이것에 대한 resolver의 이름도 allUsers여야 하고 Query안에 있어야한다
+
+  **** 이런 로직에 의하면 type User의 fullName에 대한
+  resolver를 만들 수 있다는것이다
+
+  Query, allUsers에 콘솔을 나눠서 찍어보면
+  allUsers가 먼저 호출된것을 볼 수 잇다
+  일단 allUsers resolver에 먼저 갔다는 뜻이고 거기 있는 모든 data를 가지고왔다는것이다
+  그리고 graphQL은 allUsers가 return하는 data에 
+  fullName field가 없다는것을 알게되었는데 우리의 request에는 있었다
+  그래서 resolver를 찾으려 할것이고 type User의 field이름이 fullName인것을 찾아서
+  그 resolver를 실행하는것이다
+
+  이제 root argument안을 봐볼것이다
+
+  * root *
+  여기에는 fullName을 호출하는 User object가 있을것이다
+  root를 가져오면 fullName을 호출하는 User를 보게될것
+
+  콘솔을 열어보면 allUsers는 한번만 호출되고 fullName은 두번 호출되었다
+  user들의 fullName들을 graphQL이 찾으려고했기때문에 
+  이 resolver가 처음 호출되었을때는 id가 1인것을 받아오고 두번째로 id가 2인것을 받은것이다
+*/
