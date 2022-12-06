@@ -1,15 +1,15 @@
 import { ApolloServer, gql } from "apollo-server";
 
-const tweets = [
+let tweets = [
   {
     id: "1",
-    text: "first one"
+    text: "first one",
   },
   {
     id: "2",
-    text: "second one"
+    text: "second one",
   },
-]
+];
 
 const typeDefs = gql`
   type User {
@@ -35,20 +35,36 @@ const typeDefs = gql`
 `;
 
 const resolvers = {
-  Query : {
+  Query: {
     allTweets() {
       return tweets;
     },
-    tweet(_, {id}) {
+    tweet(_, { id }) {
       // console.log(id)
-      return tweets.find(tweet => tweet.id === id)
+      return tweets.find(tweet => tweet.id === id);
     },
     ping() {
-      return "Pong"
-    }
-    
+      return "Pong";
+    },
   },
-}
+  Mutation: {
+    postTweet(_, { text, userId }) {
+      // 그냥 javascript로 database를 구현한것 뿐
+      const newTweet = {
+        id: tweets.length + 1,
+        text,
+      };
+      tweets.push(newTweet);
+      return newTweet
+    },
+    deleteTweet(_, { id }) {
+      const tweet = tweets.find(tweet => tweet.id === id)
+      if (!tweet) return false;
+      tweets = tweets.filter(tweet => tweet.id !== id)
+      return true;
+    }
+  },
+};
 const server = new ApolloServer({ typeDefs, resolvers });
 
 server.listen().then(({ url }) => {

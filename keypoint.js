@@ -444,3 +444,33 @@
 
   이제 Tweets 배열안에 있는 Tweet을 .find 메서드로 찾아볼것
 */
+
+/*
+  #4.7 Mutation Resolvers
+
+  우선 query resolver의 로직을 따라가볼것이다
+  만약 mutation type에 대한 resolver를 만들려면
+  resolver안에 Mutation이라고 쓰기만 하면된다
+
+  Mutation에 postTweet을 구현해보았는데 
+  이것은 항상 우리가 만든 새 tweet을 주어야한다.
+
+  resolver함수는 root, argument순서로 받는다는것만 기억하자
+
+  ** Apollo studio
+
+  지금까지 했던것처럼 variables를 써서 동작시키는것이 아니라
+  자동완성을 이용할 수 있다
+
+  사실 Query에 tweet.push를 해도 되지만
+  머리속에서 코드를 더 잘 정리하기 위해 개념적으로 나눈것이다. 
+  
+  deleteTweet을 만들어볼것인데 id를 받아와서 내가 지우려고하는
+  tweet을 찾아볼것이다
+
+  filter로 database array를 정리할것인데
+  tweet의 id가 삭제하려는 id와 같지 않는 tweet들로 filter를 거치면 새로운 array를 반환할것이다
+
+  * db를 mutate한다면 Mutation
+  * db를 그냥 fetching한다면 Query
+*/
