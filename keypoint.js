@@ -572,3 +572,24 @@
   이제 postTweet을 할때에 userId를 추가하여 tweet을 만들어야한다고
   말해줄것.
 */
+
+/*
+  #4.10 Documentation
+
+  local:4000 으로 오게되면 graphql studio로 오게될것이다
+  operation등 여러가지 볼 수 있다
+  schema도 볼수있는데 거기서는 내 API의 documentation이 있고
+  무엇을 return하는지 argument가 무엇인지 등등 볼 수 있다
+
+  여기서 schema에 대해 더 설명해줄 수 잇다
+  각 field에 대한 설명을 추가할 수 있음
+
+  그렇게되면 어떤 client를 쓰던 설명이 같이 있기 때문에
+  협업하기에 편해질것이다
+
+  type위에 """""" 파이썬 주석처럼 걸어주게되면
+  field에 대한 설명이 나온다
+
+  * Altair *
+  graphql studio인데 api도 explore할 수 있다
+*/
