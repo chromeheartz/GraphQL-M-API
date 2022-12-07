@@ -518,3 +518,57 @@
   user들의 fullName들을 graphQL이 찾으려고했기때문에 
   이 resolver가 처음 호출되었을때는 id가 1인것을 받아오고 두번째로 id가 2인것을 받은것이다
 */
+
+/*
+  #4.9 Relationships
+
+  Users와 Tweets를 연결해볼것이다
+  type resolver를 이용해서
+
+  fullName은 실제 data에 있지는 않은데 data에 기반해서 도출된다는것을 알 수 있다
+  그리고 GraphQL은 fullname이 resolver인것을 알 수 있다
+  resolver를 호출할것이고 무엇을 return하던지 우리의 API에 보일것이다
+
+  ** type resolver의 첫번쨰 argument
+  이것은 return 되고있는 object의 data를 줄것이다. 그러니
+  fullName을 호출하는 object의 data를 주는것
+  그래서 예를 들면 firstName이라는 다른 resolver를
+  만들 수도 있는것이다
+
+  이것을 활용해서 user / tweet을 연결해보겠다
+
+  ******
+  join 비슷한것을 type resolver로 해볼것이다
+
+  tweet의 userId로 트윗을 만든사람의 id를 넣어주고
+  그 id를 가지고 array.find를 이용해서 user에서 찾아낼것
+
+  author resolver를 만들면
+
+  {
+    "id": "1",
+    "text": "first one",
+    "author": {
+      "fullName": "nico nomad"
+    }
+  },
+
+  이런식으로 리턴이 되는데 그 이유는
+  *
+  allTweets는 Query로서 먼저 호출되고
+  많은 tweet들의 list를 호출해주는데 그 type Tweet을 return하려고 하는것이다
+  그럼 graphQL이 우리의 tweets의 data에는 author라고 하는 데이터가 없는것을 알고
+  어딘가에 author resolver가 있어야한다는것을 알것이다
+
+  graphql은 resolver의 첫번째 arg로 id, text를 주고 + userId까지 가져올것이다
+  우린 type User를 return하고있고 type User가 graphql은 무엇이닞 안다
+  그리고 우린 type User의 fullName을 request하고있다
+  우리 user에는 fullName이 없다는 것을 알고 User에 fullName resolver에
+  User data를 주는것이다
+
+  * author / fullName이라는 산출된 field를 두개 가지고있다
+  db에는 없고 그때그때 산출해낸것이다
+
+  이제 postTweet을 할때에 userId를 추가하여 tweet을 만들어야한다고
+  말해줄것.
+*/

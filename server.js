@@ -4,10 +4,12 @@ let tweets = [
   {
     id: "1",
     text: "first one",
+    userId: "2",
   },
   {
     id: "2",
     text: "second one",
+    userId: "1",
   },
 ];
 
@@ -15,14 +17,14 @@ let users = [
   {
     id: "1",
     firstName: "bucky",
-    lastName: "barnes"
+    lastName: "barnes",
   },
   {
     id: "2",
     firstName: "nico",
-    lastName: "nomad"
-  }
-]
+    lastName: "nomad",
+  },
+];
 
 const typeDefs = gql`
   type User {
@@ -58,8 +60,8 @@ const resolvers = {
       return tweets.find(tweet => tweet.id === id);
     },
     allUsers() {
-      console.log('allUsers called')
-      return users
+      console.log("allUsers called");
+      return users;
     },
     ping() {
       return "Pong";
@@ -71,23 +73,33 @@ const resolvers = {
       const newTweet = {
         id: tweets.length + 1,
         text,
+        userId,
       };
       tweets.push(newTweet);
-      return newTweet
+      return newTweet;
     },
     deleteTweet(_, { id }) {
-      const tweet = tweets.find(tweet => tweet.id === id)
+      const tweet = tweets.find(tweet => tweet.id === id);
       if (!tweet) return false;
-      tweets = tweets.filter(tweet => tweet.id !== id)
+      tweets = tweets.filter(tweet => tweet.id !== id);
       return true;
-    }
+    },
   },
   User: {
-    fullName({firstName, lastName}, args) {
-      console.log('fullName called')
-      return `${firstName} ${lastName}`
-    }
-  }
+    // 아무것도 하지않을때랑 같음
+    // firstName({ firstName }) {
+    //   return firstName
+    // },
+    fullName({ firstName, lastName }, args) {
+      console.log("fullName called");
+      return `${firstName} ${lastName}`;
+    },
+  },
+  Tweet: {
+    author({ userId }) {
+      return users.find(user => user.id === userId);
+    },
+  },
 };
 const server = new ApolloServer({ typeDefs, resolvers });
 
