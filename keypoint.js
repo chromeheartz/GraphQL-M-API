@@ -593,3 +593,45 @@
   * Altair *
   graphql studio인데 api도 explore할 수 있다
 */
+
+/*
+  #4.11 Migrating from REST to GraphQL
+  
+  REST API를 GraphQL으로 감싸는법을 해보겠다
+  예를들어 front - graph, back - rest 를 쓰고싶다면
+  아주 작은 graphql서버를 만들던가 express server최상단에 apollo를 두고
+  바꾸는 방법이 있다
+
+  처음으로 해야하는것은 field들의 type을 graphql의 schema로 서술하는것이다
+  https://yts.mx/api/v2/list_movies.json
+  팁같은것인데 여기서 내가 원하는 데이터들만 묶어서 콘솔에
+  const movie = ... 로 하고
+  Object.keys(movie)로 키값들만 쉽게들고올 수 있다
+
+  type Movie를 만들어서 타입을 지정해준다
+
+  * 다음은 resolver를 만드는것이다
+  Query에 만들어주고 allMovies라는 resolver를 만들어
+  movie list를 return해줄것이다
+
+  여기서 확실히 해야하는건 Movie type의 list를 return해야하는것이다
+  현재는 db를 안쓰고 다른 API에서 fetch해오기 때문에
+  https://yts.mx/api/v2/list_movies.json
+  를 fetch해볼것이다
+
+  Altair에서 해보면 에러가 나는데 node.js환경이라서
+  npm install node-fetch 로 설치
+
+  그러고나서 확인을 해보면 내가 필요한것만 잘 받아올수있다.
+  내 server가 다른서버로 request를 보내고 
+  그 server가 답을하면 내 server가 graphql Query에 답을주는 방식인것이다
+
+  graphQL이 Movie의 type을 아니까 내가 원하는 data로 응답하고있는것이다
+
+  또한 resolver를 하나 더 만들어서
+  그냥 movie 단일로 받아올수있게 id를 넘기고 받는형식으로도 하나 만들것이다
+
+  지금 단일로 받아올때 summary를 넣어주게되면 에러가 뜬다
+  단일에서는 없기 때문에 그 뜻은 summary가 non-nullable이 아닌
+  nullable이라고 다시 말해주어야한다
+*/
