@@ -635,3 +635,18 @@
   단일에서는 없기 때문에 그 뜻은 summary가 non-nullable이 아닌
   nullable이라고 다시 말해주어야한다
 */
+
+/*
+  #4.12 GraphQL and Beyond
+
+  현재 Query, Mutation typeqk밖에 쓰지않았지만
+
+  * Subscription type이 있다
+  Subscription type은 예약된 type같은 것인데
+  API의 바뀐것이 있을때 리얼타임으로 업데이트를 받는것이다.
+  누군가 tweet을 추가하거나 삭제할때. 
+
+  database가 있다면 hasura라는 것도 좋다
+  이것은 나의 database를 hasura의 server에 연결할 수 있게 해주어
+  data의 graphQL API를 만들어준다.
+*/
